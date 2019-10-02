@@ -19,7 +19,6 @@ private:
 
 public:
 	string specification;
-	string executer;
 
 	Project(Manager* manager, string customer);
 
@@ -41,5 +40,8 @@ public:
 
 	void input();
 	void info();
+
+
+	static void randomNumbers();
 };
 

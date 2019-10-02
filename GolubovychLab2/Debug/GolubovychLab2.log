@@ -1,0 +1,4 @@
+﻿  stdafx.cpp
+  Project.cpp
+c:\users\user\source\repos\oop-lab-2\golubovychlab2\project.cpp(83): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  GolubovychLab2.vcxproj -> C:\Users\User\Source\Repos\oop-lab-2\Debug\GolubovychLab2.exe

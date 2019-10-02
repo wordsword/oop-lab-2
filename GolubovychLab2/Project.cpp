@@ -7,10 +7,13 @@
 #include <ctime>    
 
 
-Project::Project(Manager* manager, string customer) {
+
+Project::Project(Manager* manager, string customer):allocated_days(0), budget(0) {
 	this->customer = customer;
 	this->manager = manager;
 	this->input();
+
+	manager->projects.push_back(this);
 }
 
 Manager* Project::getManager() {
@@ -53,15 +56,15 @@ void Project::input() {
 
 	time_t t = time(0);
 	tm* now = localtime(&t);
-	this->start_date = now->tm_mday + '.' + (now->tm_mon + 1) + '.' + (now->tm_year + 1900);
+	this->start_date = to_string(now->tm_mday) + "." + to_string(now->tm_mon + 1) + "." + to_string(now->tm_year + 1900);
 	
 	cout << "Введiть зарезервовану кiлькiсть днiв: ";
 	cin >> this->allocated_days;
 
-	t += this->allocated_days * 60 * 60 * 24;
+	t += (this->allocated_days * 60 * 60 * 24);
 	now = localtime(&t);
 
-	this->deadline = now->tm_mday + '.' + (now->tm_mon + 1) + '.' + (now->tm_year + 1900);
+	this->deadline = to_string(now->tm_mday) + '.' + to_string(now->tm_mon + 1) + '.' + to_string(now->tm_year + 1900);
 
 	cout << "Введiть опис проекту: ";
 	cin >> this->specification;
@@ -70,9 +73,25 @@ void Project::input() {
 void Project::info() {
 	cout << "Проект \"" << this->title << "\": " << endl;
 	cout << "\tЗамовник: " << this->customer << endl;
-	cout << "\tВиконавець: " << this->executer << endl;
 	cout << "\tМенеджер: " << this->manager->getName() << endl;
 	cout << "\tБюджет: " << this->budget << endl;
 	cout << "\tДата початку: " << this->start_date << endl;
-	cout << "\tЗапланована дата кінця: " << this->deadline << endl;
+	cout << "\tЗапланована дата кiнця: " << this->deadline << endl;
+}
+
+void Project::randomNumbers() {
+	srand(time(0));
+
+	int n = 1 + rand() % 15;
+
+	int* arr = new int[n];
+
+	for (int i = 0; i < n; i++) {
+		arr[i] = 1 + rand() % 100;
+	}
+	cout << "Випадковi числа: ";
+	for (int i = 0; i < n; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << endl;
 }
